@@ -1,0 +1,15 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+    apt-get install -y gcc-4.8 g++-4.8 make wget xz-utils bzip2 libc6-i386 lib32stdc++6 lib32z1
+
+RUN wget https://releases.linaro.org/archive/13.11/components/toolchain/binaries/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux.tar.xz && \
+    tar -xJf gcc-linaro-aarch64-none-elf-4.8-2013.11_linux.tar.xz -C /opt && \
+    rm gcc-linaro-aarch64-none-elf-4.8-2013.11_linux.tar.xz && \
+    ln -s /opt/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin/* /usr/local/bin/
+
+RUN apt-get install -y gcc-aarch64-linux-gnu gcc-arm-none-eabi build-essential git bc
+
+WORKDIR /workspace
+
+CMD ["/bin/bash"]

@@ -1,10 +1,14 @@
 #!/bin/bash
+
+UBOOT_BIN=u-boot/u-boot.bin
+NAND_IMG=./nand.img
+
 qemu-system-aarch64 \
     -M virt \
     -cpu cortex-a53 \
-    -kernel u-boot/u-boot.bin \
-    -serial mon:stdio \
-   -append "console=ttyAMA0,115200 earlyprintk loglevel=8" \
+    -smp 4 \
+    -m 512M \
+    -bios $UBOOT_BIN \
     -d unimp,guest_errors \
     -D qemu.log \
-    -monitor none
+    -device usb-ehci,id=ehci 
